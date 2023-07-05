@@ -1,0 +1,1862 @@
+[
+    {
+        "id": "ab72a41ccfbe6c50",
+        "type": "tab",
+        "label": "FILE MANAGER",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e9d1a355893ace13",
+        "type": "tab",
+        "label": "CSS",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "be0e91eaeda9e45d",
+        "type": "subflow",
+        "name": "checkAuthFM",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 140,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "8afec29839d2345a"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 400,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "8afec29839d2345a",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#ff4433",
+        "icon": "font-awesome/fa-file-image-o"
+    },
+    {
+        "id": "158685aff582af56",
+        "type": "group",
+        "z": "ab72a41ccfbe6c50",
+        "name": "",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "5880256b.849f1c",
+            "d80e7b2d.b56398",
+            "b554aa6c.001408",
+            "b7b9fdfd.9d621",
+            "4020bc41.6682c4",
+            "85771b3d.091ec8",
+            "6bbd699b.9e0f48",
+            "4930c258.7fb52c",
+            "501ef20b.d0038c",
+            "68be40ee.6212f",
+            "39d51de5.010b32",
+            "1667c9ba.f7b236",
+            "56f74c2d.c1cdc4",
+            "e0ee203c.1f299",
+            "9cc9aebf.cd5fa",
+            "c180fe75.28453",
+            "dd248f68.0156",
+            "e2889bd9.34aaf8",
+            "ed3e3107.f586a",
+            "50571c87.32b194",
+            "9807017.1cd6e",
+            "edc83ff0.851dc",
+            "33af0340.83e66c",
+            "af50349f.d62098",
+            "f2b5bcd0.3a934",
+            "bc3c4041.fcc24",
+            "727d93d6ec940939",
+            "63fe0e301fd756ab",
+            "8a848e81c9cd1546",
+            "1aa4b1cad6e2e1e6",
+            "b672c15c99470431",
+            "14e60ccd0688a552",
+            "d125f0b28e47214b",
+            "6870fb8ab3c922d4",
+            "2e4783dd612c22d8",
+            "55780d82a0e4a301",
+            "1b11623c9408f550",
+            "ada664ff369f5678",
+            "33d5ce1e24df9526",
+            "3d0802be4a51c83a",
+            "324c56cf0218bcd8",
+            "5f77a80d830b8ef3",
+            "a9c7b811a01c2062",
+            "1292a82d259b4b1f",
+            "8ad20d8579eb067d",
+            "31b3360decd2580c",
+            "818052421e6a15b1",
+            "63597ae0b9e93cb7",
+            "73692c87112e98fa",
+            "16ad19a13f3d6c06",
+            "2bf88cf34f0778e9",
+            "eeacf574b8f7e53b",
+            "143efd10bcede4a3",
+            "6bac9a62ce14a5fd",
+            "d9841ffa412b566c",
+            "9b120ceff452b3d8",
+            "ebedab897e2b8ce0",
+            "9b4e0f59c1929a57",
+            "63aa824c46179782",
+            "5ab8c554f3ca7349",
+            "561a4d184d1931e8",
+            "791f3745f80e6e5a",
+            "dd324bd0210ce4dd",
+            "fae9aaa718d4f17e",
+            "d309460b853901e1",
+            "4a770a16b187bd71",
+            "5b6f69d1efe0661c",
+            "85b337292a89d74f",
+            "2b142f61c32cbbd6",
+            "9c87df6ce42c427f",
+            "4191743bf1c8c8d3",
+            "edc83ff0.851dc",
+            "254afd70679ebbdf",
+            "8e90753c3d4a39d2",
+            "7d6eb41ce4b86e3f"
+        ],
+        "x": 34,
+        "y": -1,
+        "w": 1572,
+        "h": 982
+    },
+    {
+        "id": "8afec29839d2345a",
+        "type": "function",
+        "z": "be0e91eaeda9e45d",
+        "name": "checker",
+        "func": "const headers = msg.req.rawHeaders\nconst index = headers.indexOf(\"referer\")\n\nif (headers[index + 1] == 'https://testforce.tadiranforce.co.il/') {\n    return [msg, null]\n} else {\n    msg.statusCode = 401;\n    msg.payload = {\n        \"success\": false,\n        \"error\": \"Forbidden!\"\n    }\n    return [null, msg]\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "152b98ae70cf8848"
+            ],
+            [
+                "76cde29eeec8e2da",
+                "152b98ae70cf8848"
+            ]
+        ],
+        "icon": "font-awesome/fa-check-square-o"
+    },
+    {
+        "id": "76cde29eeec8e2da",
+        "type": "function",
+        "z": "be0e91eaeda9e45d",
+        "name": "send error",
+        "func": "msg.statusCode = 401;\nmsg.payload = {\n    \"success\": false,\n    \"error\": \"Forbidden!\"\n}\nreturn msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 140,
+        "wires": [
+            [
+                "ad95c846a2724046"
+            ]
+        ]
+    },
+    {
+        "id": "ad95c846a2724046",
+        "type": "http response",
+        "z": "be0e91eaeda9e45d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 630,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "152b98ae70cf8848",
+        "type": "debug",
+        "z": "be0e91eaeda9e45d",
+        "name": "FM",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "5880256b.849f1c",
+        "type": "http in",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "url": "/fm/list/files",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "501ef20b.d0038c",
+                "63fe0e301fd756ab"
+            ]
+        ]
+    },
+    {
+        "id": "d80e7b2d.b56398",
+        "type": "http response",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1210,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b554aa6c.001408",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "// // @ts-ignore\n// NewMsg={};\n// NewMsg.payload={\n//     success:true,\n// };\n// NewMsg.payload.payload = msg.payload.map(elem=>{\n//     let patch;\n//     if(!elem.stat.isDirectory){\n//         patch = msg.req.query.path +\"/\"+elem.name;\n//     }else{\n//         patch = elem.name;\n//     }\n//     return{\n//         \"isDirectory\":elem.stat.isDirectory,\n//         \"name\":elem.name,\n//         \"path\":patch,\n//         \"size\":(elem.stat.size/1048576).toFixed(3) + \"Мb\",\n//         \"editedAt\":elem.stat.created,\n        \n//     }\n// })\n\n// msg.payload = NewMsg.payload;\n// return msg;\n\n\n// @ts-ignore\nNewMsg = {};\nNewMsg.payload = {\n    success: true,\n};\nNewMsg.payload.payload = msg.payload.map(elem => {\n    let patch;\n    if (msg.start_path) {\n        patch = msg.start_path + \"/\" + elem.name;\n    } else {\n        patch = elem.name;\n    }\n    return {\n        \"isDirectory\": elem.stat.isDirectory,\n        \"name\": elem.name,\n        \"path\": patch,\n        \"size\": (elem.stat.size / 1048576).toFixed(3) + \"Мb\",\n        \"editedAt\": elem.stat.created,\n\n    }\n})\n\nmsg.payload = NewMsg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 200,
+        "wires": [
+            [
+                "727d93d6ec940939",
+                "5b6f69d1efe0661c"
+            ]
+        ]
+    },
+    {
+        "id": "b7b9fdfd.9d621",
+        "type": "http in",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "url": "/fm/remove/files",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 860,
+        "wires": [
+            [
+                "2b142f61c32cbbd6",
+                "edc83ff0.851dc"
+            ]
+        ]
+    },
+    {
+        "id": "4020bc41.6682c4",
+        "type": "file",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "delete",
+        "encoding": "none",
+        "x": 610,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "85771b3d.091ec8",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "if (msg.req.query.path.length > 0){\n    msg.filename = \"/data/storage/\" + msg.req.query.path + \"/\" + msg.payload.payload[msg.index];\n    node.warn(msg.filename)\n    return msg;\n}\n\nmsg.filename = \"/data/storage/\"+msg.req.query.path+\"/\"+msg.payload.payload[msg.index];\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 920,
+        "wires": [
+            [
+                "4020bc41.6682c4",
+                "edc83ff0.851dc",
+                "9c87df6ce42c427f"
+            ]
+        ]
+    },
+    {
+        "id": "6bbd699b.9e0f48",
+        "type": "http response",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1290,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "4930c258.7fb52c",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "// @ts-ignore\nNewMsg={};\nNewMsg.payload={\n    success:true,\n};\nNewMsg.payload.payload = msg.payload.map(elem=>{\n    return{\n        \"isDirectory\":elem.stat.isDirectory,\n        \"name\":elem.name,\n        \"path\":elem.name,\n        \"size\":(elem.stat.size/1048576).toFixed(3) + \"Мb\",\n        \"editedAt\":elem.stat.created,\n    }\n})\n\nmsg.payload = NewMsg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 860,
+        "wires": [
+            [
+                "6bbd699b.9e0f48"
+            ]
+        ]
+    },
+    {
+        "id": "501ef20b.d0038c",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "// msg.payload.start = \"/data/storage/\"+msg.payload.path;\n// return msg;\n\n\nmsg.payload.start = \"/data/storage/\" + msg.payload.path;\nmsg.start_path = msg.payload.path;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 200,
+        "wires": [
+            [
+                "33af0340.83e66c",
+                "63fe0e301fd756ab"
+            ]
+        ]
+    },
+    {
+        "id": "68be40ee.6212f",
+        "type": "http in",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "url": "/fm/rename/files",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 720,
+        "wires": [
+            [
+                "1b11623c9408f550",
+                "e0ee203c.1f299"
+            ]
+        ]
+    },
+    {
+        "id": "39d51de5.010b32",
+        "type": "http response",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1370,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "1667c9ba.f7b236",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "if (msg.req.query.path.length > 0) {\n    msg.payload.start = \"/data/storage/\" + msg.req.query.path[0];\n    msg.req.query.path = msg.req.query.path[0]\n    return msg;\n}\n\nmsg.payload.start = \"/data/storage/\"+msg.req.query.path;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 720,
+        "wires": [
+            [
+                "f2b5bcd0.3a934",
+                "fae9aaa718d4f17e"
+            ]
+        ]
+    },
+    {
+        "id": "56f74c2d.c1cdc4",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "// @ts-ignore\nNewMsg = {};\nNewMsg.payload={\n    success:true,\n};\nNewMsg.payload.payload = msg.payload.map(elem=>{\n    let patch;\n    if(!elem.stat.isDirectory){\n        patch = msg.req.query.path +\"/\"+elem.name;\n    }else{\n        patch = elem.name;\n    }\n    return{\n        \"isDirectory\":elem.stat.isDirectory,\n        \"name\":elem.name,\n        \"path\":patch,\n        \"size\":(elem.stat.size/1048576).toFixed(3) + \"Мb\",\n        \"editedAt\":elem.stat.created,\n        \n    }\n})\n\nmsg.payload = NewMsg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 720,
+        "wires": [
+            [
+                "39d51de5.010b32",
+                "791f3745f80e6e5a"
+            ]
+        ]
+    },
+    {
+        "id": "e0ee203c.1f299",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "if (msg.req.query.path.length > 0){\n    msg.payload.start = \"/data/storage/\" + msg.req.query.path;\n    return msg;  \n}\nmsg.payload.start = \"/data/storage/\"+msg.req.query.path;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 720,
+        "wires": [
+            [
+                "bc3c4041.fcc24"
+            ]
+        ]
+    },
+    {
+        "id": "9cc9aebf.cd5fa",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "if (msg.req.query.path.length > 0){\n    msg.payload.start = \"/data/storage/\" + msg.req.query.path;\n    return msg;\n}\n\nmsg.payload.start = \"/data/storage/\"+msg.req.query.path;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 840,
+        "wires": [
+            [
+                "af50349f.d62098",
+                "4191743bf1c8c8d3"
+            ]
+        ]
+    },
+    {
+        "id": "c180fe75.28453",
+        "type": "catch",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 150,
+        "y": 40,
+        "wires": [
+            [
+                "2e4783dd612c22d8"
+            ]
+        ]
+    },
+    {
+        "id": "dd248f68.0156",
+        "type": "catch",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "scope": [
+            "ccc9150b.a8cb08"
+        ],
+        "uncaught": false,
+        "x": 140,
+        "y": 100,
+        "wires": [
+            [
+                "e2889bd9.34aaf8",
+                "50571c87.32b194"
+            ]
+        ]
+    },
+    {
+        "id": "e2889bd9.34aaf8",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "catch",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "ed3e3107.f586a",
+        "type": "http response",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 730,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "50571c87.32b194",
+        "type": "file in",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "get_no_file",
+        "filename": "/data/img/image/no-img.png",
+        "filenameType": "str",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 350,
+        "y": 120,
+        "wires": [
+            [
+                "9807017.1cd6e"
+            ]
+        ]
+    },
+    {
+        "id": "9807017.1cd6e",
+        "type": "change",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "Set Headers",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.content-type",
+                "pt": "msg",
+                "to": "image/png",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 120,
+        "wires": [
+            [
+                "ed3e3107.f586a"
+            ]
+        ]
+    },
+    {
+        "id": "33af0340.83e66c",
+        "type": "fs-file-lister",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "start": "{{msg.payload.start}}",
+        "pattern": "",
+        "folders": "",
+        "hidden": true,
+        "lstype": "both",
+        "path": false,
+        "single": true,
+        "depth": 0,
+        "stat": true,
+        "showWarnings": true,
+        "x": 640,
+        "y": 200,
+        "wires": [
+            [
+                "b554aa6c.001408",
+                "727d93d6ec940939"
+            ]
+        ]
+    },
+    {
+        "id": "af50349f.d62098",
+        "type": "fs-file-lister",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "start": "{{msg.payload.start}}",
+        "pattern": "",
+        "folders": "",
+        "hidden": true,
+        "lstype": "both",
+        "path": false,
+        "single": true,
+        "depth": 0,
+        "stat": true,
+        "showWarnings": true,
+        "x": 900,
+        "y": 860,
+        "wires": [
+            [
+                "4930c258.7fb52c"
+            ]
+        ]
+    },
+    {
+        "id": "f2b5bcd0.3a934",
+        "type": "fs-file-lister",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "start": "{{msg.payload.start}}",
+        "pattern": "",
+        "folders": "",
+        "hidden": true,
+        "lstype": "both",
+        "path": false,
+        "single": true,
+        "depth": 0,
+        "stat": true,
+        "showWarnings": true,
+        "x": 1040,
+        "y": 720,
+        "wires": [
+            [
+                "56f74c2d.c1cdc4"
+            ]
+        ]
+    },
+    {
+        "id": "727d93d6ec940939",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "63fe0e301fd756ab",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "debug 110",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "8a848e81c9cd1546",
+        "type": "inject",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "501ef20b.d0038c"
+            ]
+        ]
+    },
+    {
+        "id": "1aa4b1cad6e2e1e6",
+        "type": "change",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "'/data/storage/' & payload.file",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 320,
+        "wires": [
+            [
+                "b672c15c99470431"
+            ]
+        ]
+    },
+    {
+        "id": "b672c15c99470431",
+        "type": "file in",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "get_file",
+        "filename": "filename",
+        "filenameType": "msg",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 720,
+        "y": 320,
+        "wires": [
+            [
+                "d309460b853901e1",
+                "85b337292a89d74f"
+            ]
+        ]
+    },
+    {
+        "id": "14e60ccd0688a552",
+        "type": "change",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "Set Headers",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.content-type",
+                "pt": "msg",
+                "to": "image/png",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "headers['access-control-allow-credentials']",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "headers.accept-ranges",
+                "pt": "msg",
+                "to": "bytes",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "headers.x-xss-protection",
+                "pt": "msg",
+                "to": "1; mode=block",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "headers.x-frame-options",
+                "pt": "msg",
+                "to": "SAMEORIGIN",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "headers.nel",
+                "pt": "msg",
+                "to": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "headers.x-dns-prefetch-control",
+                "pt": "msg",
+                "to": "off",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "headers.x-download-options",
+                "pt": "msg",
+                "to": "noopen",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1210,
+        "y": 360,
+        "wires": [
+            [
+                "d125f0b28e47214b",
+                "4a770a16b187bd71"
+            ]
+        ]
+    },
+    {
+        "id": "d125f0b28e47214b",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "function",
+        "func": "msg.headers = {\n    ...msg.headers,\n    ['x-content-type-options']: 'nosniff',\n    ['access-control-allow-credentials']: true,\n    ['cache-control']: 'public, max-age=14400',\n    ['cf-cache-status']: 'EXPIRED',\n    ['cf-ray']: '747ece538ba590b2-FRA',\n//report - to: { \"endpoints\": [{ \"url\": \"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=6FLrusuf%2B3JD%2By2hHTtEFI4LqfbHg6hE9OshVZ%2FGZHvRuKBMMPaZtmTvqedBYxS2H4SCN2hx0ulKIF4%2FetNCOLpZzbK46BXQfKwNg05NsEn3O4Uu6Oh5sk2s1A9i87oLs0t0yHlvVjNd\" }], \"group\": \"cf-nel\", \"max_age\": 604800 }\n//server: cloudflare\n    ['strict-transport-security']: 'max-age=15552000; includeSubDomains',\n    // ['link']: 'rel=\"shortcut icon\" href=\"\"',\n    ['Content-Security-Policy']:\"img-src 'none'\",\n    ['x-xss-protection']:' 1; mode = block'\n    //rel: \"shortcut icon\",\n    //vary: 'Origin,Accept-Encoding'\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1400,
+        "y": 360,
+        "wires": [
+            [
+                "6870fb8ab3c922d4"
+            ]
+        ]
+    },
+    {
+        "id": "6870fb8ab3c922d4",
+        "type": "http response",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1530,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "2e4783dd612c22d8",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "debug 204",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 370,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "55780d82a0e4a301",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "debug 206",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 290,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "1b11623c9408f550",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "debug 207",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 210,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "ada664ff369f5678",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "if(msg.payload.file){\n   msg.path = \"/data/storage/\" + msg.req.query.path + \"/\"\n//node.warn(msg.req.query.path)\n   msg.filename = msg.payload.file\n   return[msg,null]\n}\n//node.warn(msg.req.query.path)\nif( msg.req.query.path.length>0){\n   const decodedFilename = msg.req.files[0].originalname;\n   const outputString = decodedFilename.replace(/י/g, '`')\n\n   msg.filename = \"/data/storage/\" + msg.req.query.path + \"/\" + outputString;;\n\n   //msg.filename =\"/data/\"+msg.req.query.path+\"/\"+ msg.req.files[0].originalname;\n   msg.req.query.path = msg.req.query.path\n   msg.payload.file = msg.req.files[0].buffer;\n   msg.payload = msg.payload.file;\n   return [null, msg];\n}\nconst decodedFilename = msg.req.files[0].originalname;\nconst outputString = decodedFilename.replace(/י/g, '`')\n\nmsg.filename = \"/data/storage/\" + msg.req.query.path + \"/\" + outputString;;\n\n//msg.filename =\"/data/\"+msg.req.query.path+\"/\"+ msg.req.files[0].originalname;\n\nmsg.payload.file = msg.req.files[0].buffer;\nmsg.payload = msg.payload.file;\nreturn [null,msg];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 540,
+        "wires": [
+            [
+                "33d5ce1e24df9526",
+                "dd324bd0210ce4dd"
+            ],
+            [
+                "324c56cf0218bcd8",
+                "dd324bd0210ce4dd"
+            ]
+        ]
+    },
+    {
+        "id": "33d5ce1e24df9526",
+        "type": "fs-mkdir",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "purpose": "reg",
+        "path": "path",
+        "pathType": "msg",
+        "foldername": "filename",
+        "foldernameType": "msg",
+        "recursive": true,
+        "exists": true,
+        "prefix": "",
+        "prefixType": "str",
+        "mode": "777",
+        "property": "payload",
+        "propertyType": "msg",
+        "x": 570,
+        "y": 480,
+        "wires": [
+            [
+                "16ad19a13f3d6c06"
+            ]
+        ]
+    },
+    {
+        "id": "3d0802be4a51c83a",
+        "type": "http in",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "url": "/fm/upload/files",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 560,
+        "wires": [
+            [
+                "561a4d184d1931e8",
+                "ada664ff369f5678"
+            ]
+        ]
+    },
+    {
+        "id": "324c56cf0218bcd8",
+        "type": "file",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 580,
+        "y": 580,
+        "wires": [
+            [
+                "5f77a80d830b8ef3",
+                "73692c87112e98fa"
+            ]
+        ]
+    },
+    {
+        "id": "5f77a80d830b8ef3",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "msg.payload.start = \"/data/storage/\"+msg.req.query.path;\n//msg.payload.start = \"/data/\"+msg.req.query.path;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 560,
+        "wires": [
+            [
+                "a9c7b811a01c2062",
+                "63597ae0b9e93cb7"
+            ]
+        ]
+    },
+    {
+        "id": "a9c7b811a01c2062",
+        "type": "fs-file-lister",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "start": "{{msg.payload.start}}",
+        "pattern": "",
+        "folders": "",
+        "hidden": true,
+        "lstype": "both",
+        "path": false,
+        "single": true,
+        "depth": 0,
+        "stat": true,
+        "showWarnings": true,
+        "x": 980,
+        "y": 560,
+        "wires": [
+            [
+                "1292a82d259b4b1f",
+                "818052421e6a15b1"
+            ]
+        ]
+    },
+    {
+        "id": "1292a82d259b4b1f",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "// @ts-ignore\nNewMsg = {};\nNewMsg.payload={\n    success:true,\n};\nNewMsg.payload.payload = msg.payload.map(elem=>{\n    return{\n        \"isDirectory\":elem.stat.isDirectory,\n        \"name\":elem.name,\n        \"path\":elem.name,\n        \"size\":(elem.stat.size/1048576).toFixed(3) + \"Мb\",\n        \"editedAt\":elem.stat.created,\n    }\n})\n\nmsg.payload = NewMsg.payload;\nmsg.req =\"\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1140,
+        "y": 560,
+        "wires": [
+            [
+                "8ad20d8579eb067d",
+                "31b3360decd2580c"
+            ]
+        ]
+    },
+    {
+        "id": "8ad20d8579eb067d",
+        "type": "http response",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1310,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "31b3360decd2580c",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1290,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "818052421e6a15b1",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1150,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "63597ae0b9e93cb7",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "73692c87112e98fa",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "16ad19a13f3d6c06",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "node.warn(msg.req.query.path)\nmsg.payload={\n}\nmsg.payload.start = \"/data/storage/\"+msg.req.query.path;\nnode.warn(msg.payload.start)\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 480,
+        "wires": [
+            [
+                "2bf88cf34f0778e9"
+            ]
+        ]
+    },
+    {
+        "id": "2bf88cf34f0778e9",
+        "type": "fs-file-lister",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "start": "{{msg.payload.start}}",
+        "pattern": "",
+        "folders": "",
+        "hidden": true,
+        "lstype": "both",
+        "path": false,
+        "single": true,
+        "depth": 0,
+        "stat": true,
+        "showWarnings": true,
+        "x": 1020,
+        "y": 480,
+        "wires": [
+            [
+                "eeacf574b8f7e53b"
+            ]
+        ]
+    },
+    {
+        "id": "eeacf574b8f7e53b",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "func": "// @ts-ignore\nNewMsg = {};\nNewMsg.payload={\n    success:true,\n};\nNewMsg.payload.payload = msg.payload.map(elem=>{\n    return{\n        \"isDirectory\":elem.stat.isDirectory,\n        \"name\":elem.name,\n        \"path\":elem.name,\n        \"size\":(elem.stat.size/1048576).toFixed(3) + \"Мb\",\n        \"editedAt\":elem.stat.created,\n    }\n})\n\nmsg.payload = NewMsg.payload;\nmsg.req =\"\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1200,
+        "y": 480,
+        "wires": [
+            [
+                "143efd10bcede4a3"
+            ]
+        ]
+    },
+    {
+        "id": "143efd10bcede4a3",
+        "type": "http response",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1350,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "6bac9a62ce14a5fd",
+        "type": "http in",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "url": "/files",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 360,
+        "wires": [
+            [
+                "d9841ffa412b566c",
+                "55780d82a0e4a301"
+            ]
+        ]
+    },
+    {
+        "id": "d9841ffa412b566c",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "function 126",
+        "func": "if (msg.payload.file.includes('.png') || msg.payload.file.includes('.jpeg') || msg.payload.file.includes('.svg') || msg.payload.file.includes('.jpg')) {\n    return [msg, null,null]\n} \nelse if (msg.payload.file.includes('.mp4')){\n    return[null,msg,null]\n}\nelse {\n    return [null, msg]\n}\n\n",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 360,
+        "wires": [
+            [
+                "1aa4b1cad6e2e1e6"
+            ],
+            [
+                "254afd70679ebbdf"
+            ],
+            [
+                "9b120ceff452b3d8"
+            ]
+        ]
+    },
+    {
+        "id": "9b120ceff452b3d8",
+        "type": "change",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "'/data/storage/' & payload.file",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 400,
+        "wires": [
+            [
+                "ebedab897e2b8ce0"
+            ]
+        ]
+    },
+    {
+        "id": "ebedab897e2b8ce0",
+        "type": "file in",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "get_file",
+        "filename": "filename",
+        "filenameType": "msg",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 720,
+        "y": 400,
+        "wires": [
+            [
+                "9b4e0f59c1929a57"
+            ]
+        ]
+    },
+    {
+        "id": "9b4e0f59c1929a57",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "function",
+        "func": "msg.headers = {\n    \"Content-Disposition\": \"inline\",\n    \"filename\": \"calls.pdf\",\n    'Content-Type': 'application/pdf',\n    \"charset\": 'utf-8',\n    \"content-transfer-encoding\": \"binary\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 400,
+        "wires": [
+            [
+                "63aa824c46179782"
+            ]
+        ]
+    },
+    {
+        "id": "63aa824c46179782",
+        "type": "http response",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1090,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "5ab8c554f3ca7349",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1150,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "561a4d184d1931e8",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "upload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "791f3745f80e6e5a",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "debug 398",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1290,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "dd324bd0210ce4dd",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "debug 399",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "fae9aaa718d4f17e",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "debug 400",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 990,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "d309460b853901e1",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "quality60",
+        "func": "/*const optimized = await sharp(msg.payload)\n    .toFormat(\"png\", { quality: 60 })\n    .toBuffer();\n\nmsg.payload = optimized;\n*/\nreturn msg\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "sharp",
+                "module": "sharp"
+            }
+        ],
+        "x": 940,
+        "y": 320,
+        "wires": [
+            [
+                "4a770a16b187bd71",
+                "5ab8c554f3ca7349"
+            ]
+        ]
+    },
+    {
+        "id": "4a770a16b187bd71",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "function 317",
+        "func": "msg.headers = {\n    // \"Content-Disposition\": \"inline\",\n    //'Content-Type': 'application/pdf',\n    'Content-Type': 'image/jpeg',\n    //\"charset\": 'utf-8',\n    //\"content-transfer-encoding\": \"binary\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1230,
+        "y": 320,
+        "wires": [
+            [
+                "5ab8c554f3ca7349",
+                "6870fb8ab3c922d4"
+            ]
+        ]
+    },
+    {
+        "id": "5b6f69d1efe0661c",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "sorting",
+        "func": "const sorted = msg.payload.payload.sort((a, b) => {\n    if (a.isDirectory && !b.isDirectory) {\n        // If a is a directory and b is not, a should come first\n        return -1;\n    } else if (!a.isDirectory && b.isDirectory) {\n        // If a is not a directory and b is, b should come first\n        return 1;\n    } else {\n        // If both a and b are directories or both are not, sort by editedAt\n        return b.editedAt - a.editedAt;\n    }\n});\n\n\n\n\nconst moveToDown = (folder, object)=>{\n    const forderIndex = object.findIndex(obj => obj.name === folder);\n\n    if (forderIndex !== -1) {\n        // Remove the object at the found index and store it in a variable\n        const obj = object.splice(forderIndex, 1)[0];\n        // Add the object to the end of the array\n        object.push(obj);\n    }\n}\n\nlet folders = sorted.filter(e => e.isDirectory == true).filter(e => e.name !== 'default' && e.name !== 'images' && e.name !== 'files')\n\nfolders.forEach(f => moveToDown(f.name, sorted))\n\nmsg.payload.payload = sorted\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 200,
+        "wires": [
+            [
+                "d80e7b2d.b56398",
+                "727d93d6ec940939"
+            ]
+        ]
+    },
+    {
+        "id": "85b337292a89d74f",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "2b142f61c32cbbd6",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 210,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "9c87df6ce42c427f",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "4191743bf1c8c8d3",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "edc83ff0.851dc",
+        "type": "counter-loop",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "check length",
+        "counter": "index",
+        "counterType": "msg",
+        "reset": false,
+        "resetValue": "value-null",
+        "initial": 0,
+        "initialType": "num",
+        "operator": "lt",
+        "termination": "payload.payload.length",
+        "terminationType": "msg",
+        "increment": 1,
+        "incrementType": "num",
+        "x": 430,
+        "y": 860,
+        "wires": [
+            [
+                "9cc9aebf.cd5fa"
+            ],
+            [
+                "85771b3d.091ec8"
+            ]
+        ]
+    },
+    {
+        "id": "bc3c4041.fcc24",
+        "type": "fs-ops-move",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "sourcePath": "payload.start",
+        "sourcePathType": "msg",
+        "sourceFilename": "payload.oldName",
+        "sourceFilenameType": "msg",
+        "destPath": "payload.start",
+        "destPathType": "msg",
+        "destFilename": "payload.newName",
+        "destFilenameType": "msg",
+        "link": false,
+        "x": 680,
+        "y": 720,
+        "wires": [
+            [
+                "1667c9ba.f7b236",
+                "fae9aaa718d4f17e"
+            ]
+        ]
+    },
+    {
+        "id": "254afd70679ebbdf",
+        "type": "change",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "'/data/storage/' & payload.file",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 360,
+        "wires": [
+            [
+                "966ef3c6fc7f174c"
+            ]
+        ]
+    },
+    {
+        "id": "966ef3c6fc7f174c",
+        "type": "file in",
+        "z": "ab72a41ccfbe6c50",
+        "name": "get_file",
+        "filename": "filename",
+        "filenameType": "msg",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 720,
+        "y": 360,
+        "wires": [
+            [
+                "87a0155b9b3c1804",
+                "8e90753c3d4a39d2",
+                "85b337292a89d74f"
+            ]
+        ]
+    },
+    {
+        "id": "e6bae04238d5b986",
+        "type": "http response",
+        "z": "ab72a41ccfbe6c50",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 990,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "87a0155b9b3c1804",
+        "type": "function",
+        "z": "ab72a41ccfbe6c50",
+        "name": "function",
+        "func": "msg.headers = {\n    \"Content-Disposition\": \"inline\",\n    'Content-Type':'video/mp4'\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 360,
+        "wires": [
+            [
+                "e6bae04238d5b986",
+                "7d6eb41ce4b86e3f"
+            ]
+        ]
+    },
+    {
+        "id": "8e90753c3d4a39d2",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "debug 403",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "7d6eb41ce4b86e3f",
+        "type": "debug",
+        "z": "ab72a41ccfbe6c50",
+        "g": "158685aff582af56",
+        "name": "debug 404",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "c13653a3c3d46321",
+        "type": "template",
+        "z": "e9d1a355893ace13",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "css",
+        "syntax": "mustache",
+        "template": "/* .header{\ntop: 0px !important;\n/* left: 182px !important; */\npadding: 0px !important;\n/* width: 100% !important; */\nborder-bottom: 2px solid rgb(241, 243, 244) !important;\n} */\n\n.menu_section{\nbox-shadow: rgba(0, 0, 0, 0.25) 1px 2px 3px !important;\nheight: 100vh !important;\npadding: 0px !important;\nleft: 0px !important;\ntop: 0px !important;\nborder-right: 2px solid rgb(241, 243, 244) !important;\n}\n\n\n\n.image{\n    padding: 4px 14px !important;\n    left: 0px !important;\n    width: 100% !important;\n    border-bottom: 2px solid rgb(241, 243, 244) !important;\n    height: 75px !important;\n}\n\n\n.menu .active span{\ncolor: #2a2f36 !important;\n}\n\n.menu .active {\n    background: #ebf1fb !important;\n}\n\n.menu button:hover{\nbackground: #ebf1fb;\n}\n\n.menu button{\n    box-shadow: none !important;\n}\n\n.menu span{\n    font-size: 16px !important;\n    font-weight: 400 !important;\n    color: #00000099 !important;\n}\n\n.menu {\n    left: 0px !important;\n    width: 100% !important;\n    padding: 0 !important;\n}\n\n.menu_wrap{\n    position: fixed !important;\n    left: 0px!important;\n    top: 0px !important;\n    height: 100vh !important;\n    /* width: 178.312px!important; */\n    padding: 0px!important;\n    box-shadow: rgba(0, 0, 0, 0.25) 1px 2px 3px !important;\n}\n\n.menu button {\n    justify-content: start !important;\n    padding: 5px 10px 5px 15px !important;\n    margin-bottom: 5px !important;\n}\n\n.setting_title{\n    padding: 4px 14px !important;\n    left: 0px !important;\n    width: 100% !important;\n    border-bottom: 2px solid rgb(241, 243, 244) !important;\n}\n\n.setting_title .bp3-ui-text {\n    font-weight: 600 !important;\n    font-size: 18px !important;\n}\n\n.telegramList {\n    padding: 10px 20px !important;\n}\n\n.telegramList .custom-wrapper-canvas-list{\n    display: flex;\n    flex-direction: column !important;\n}\n.telegramList .custom-wrapper-canvas-list button {\n    display: none !important;\n}\n.telegramList .custom-wrapper-canvas-list .t--widget-containerwidget{\n    width: 90% !important;\n    position: static !important;\n    border-radius: 8px!important;\n    padding: 0 !important;\n    margin-bottom: 7px;\n    margin-right: auto !important;\n    margin-left: 0 !important;\n    background-color: #cfcfdb !important;\n}\n.telegramList .custom-wrapper-canvas-list .t--widget-containerwidget:nth-of-type(odd){\n    margin-right: 0 !important;\n    margin-left: auto !important;\n    background-color: #e5e5e6 !important;\n}\n.telegramList .t--widget-textwidget{\n    width: auto !important;\n    position: static !important;\n    padding: 5px 15px !important;\n    height: 100% !important;\n}\n.telegramList .t--widget-textwidget span{\n    font-weight: 500; \n    font-size: 16px;\n    line-height: 125%;\n}\n\n.telegramList .custom-wrapper-canvas-list .t--widget-containerwidget:nth-of-type(odd) .t--widget-textwidget span{\n    text-align: end;\n}\n\n.telegramWrap{\n    padding: 0!important;\n}\n\n.container{\n    min-height: 100vh;\n}\n\n.selectedTab{\n    box-shadow: rgb(235, 239, 242) -1px 0px 0px inset, rgb(235, 239, 242) 0px 0px 0px inset, rgb(55 169 235) 0px 4px 0px inset !important;\n}",
+        "output": "str",
+        "x": 240,
+        "y": 180,
+        "wires": [
+            [
+                "6c14c16dc9e0d8f4"
+            ]
+        ]
+    },
+    {
+        "id": "6c14c16dc9e0d8f4",
+        "type": "http response",
+        "z": "e9d1a355893ace13",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "text/css"
+        },
+        "x": 390,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "cbdef52a04ca4507",
+        "type": "http in",
+        "z": "e9d1a355893ace13",
+        "name": "",
+        "url": "/css",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 180,
+        "wires": [
+            [
+                "c13653a3c3d46321"
+            ]
+        ]
+    }
+]
